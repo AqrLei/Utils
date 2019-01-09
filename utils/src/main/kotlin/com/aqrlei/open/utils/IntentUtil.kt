@@ -27,8 +27,35 @@ object IntentUtil {
      */
     fun queryActivities(context: Context, intent: Intent): Boolean {
         return context.packageManager.queryIntentActivities(
-                intent,
-                PackageManager.MATCH_DEFAULT_ONLY) != null
+            intent,
+            PackageManager.MATCH_DEFAULT_ONLY
+        ) != null
+    }
+
+
+    /**
+     * 跳转到邮件相关的应用
+     */
+    fun toEmailApp(context: Context, email: String, errorAction: (Exception) -> Unit) {
+        val intent = Intent().apply {
+            action = Intent.ACTION_SENDTO
+            data = Uri.parse("mailto:$email")
+        }
+        try {
+            context.startActivity(intent)
+        } catch (e: Exception) {
+            errorAction(e)
+        }
+    }
+
+    /**
+     * 通过浏览器打开网页
+     */
+    fun toWebPage(context: Context, uri: String) {
+        val intent = Intent()
+        intent.data = Uri.parse(uri)
+        intent.action = Intent.ACTION_VIEW
+        context.startActivity(intent)
     }
 
     /**
@@ -38,7 +65,7 @@ object IntentUtil {
      */
     fun toAppSetting(activity: Activity, reqCode: Int) {
         val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
-                .setData(Uri.fromParts("package", activity.packageName, null))
+            .setData(Uri.fromParts("package", activity.packageName, null))
         if (queryActivities(activity, intent)) {
             activity.startActivityForResult(intent, reqCode)
         }
@@ -116,7 +143,7 @@ object IntentUtil {
         val intent = Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI)
         if (queryActivities(context, intent)) {
             fragment?.startActivityForResult(intent, reqCode)
-                    ?: context.startActivityForResult(intent, reqCode)
+                ?: context.startActivityForResult(intent, reqCode)
         }
     }
 
