@@ -7,11 +7,11 @@ plugins {
 }
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion buildVersion.compile
 
     defaultConfig {
-        minSdkVersion 16
-        targetSdkVersion 28
+        minSdkVersion buildVersion.min
+        targetSdkVersion buildVersion.target
         versionCode 11
         versionName "0.3.1"
 
@@ -45,8 +45,8 @@ dependencies {
     implementation deps.androidx.appcompat
     implementation deps.kotlin.stdlib
     implementation deps.kotlin.coroutines
-    implementation deps.zxing.core
-    testImplementation deps.test.junit
+    implementation deps.zxing
+    testImplementation deps.junit
 
 }
 

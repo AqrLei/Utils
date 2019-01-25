@@ -5,11 +5,11 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion buildVersion.compile
     defaultConfig {
         applicationId "com.aqrlei.open.utils"
-        minSdkVersion 16
-        targetSdkVersion 28
+        minSdkVersion buildVersion.min
+        targetSdkVersion buildVersion.target
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -26,9 +26,9 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':utils')
     implementation deps.kotlin.stdlib
-    testImplementation deps.test.junit
-    androidTestImplementation deps.test.runner
-    androidTestImplementation deps.test.espresso
+    testImplementation deps.junit
+    androidTestImplementation deps.androidx.runner
+    androidTestImplementation deps.androidx.espresso
     implementation deps.androidx.appcompat
     implementation deps.androidx.constraint
 }
