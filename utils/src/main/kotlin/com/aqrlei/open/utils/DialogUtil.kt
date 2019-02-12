@@ -15,6 +15,7 @@ import java.util.*
 
 /**
  * @author aqrlei on 2018/11/14
+ * //TODO 时间弹窗改为返回Long类型,具体样式由具体场景确定
  */
 object DialogUtil {
     /**
